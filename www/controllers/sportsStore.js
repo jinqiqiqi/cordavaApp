@@ -18,8 +18,8 @@ app
 		templateUrl: "./views/productList.html"
 	});
 })
-.constant('dataUrl', "http://sportstore:5500/products")
-.constant('orderUrl', "http://sportstore:5500/orders")
+.constant('dataUrl', "http://192.168.232.114:5500/products")
+.constant('orderUrl', "http://192.168.232.114:5500/orders")
 .controller('sportsStoreCtrl', ['$scope', '$http', '$location', 'dataUrl', 'orderUrl', 'cart', function($scope, $http, $location, dataUrl, orderUrl, cart){
 	$scope.data = {};
 

@@ -21,8 +21,69 @@
 	<script src="components/cart/cart.js" type="text/javascript"></script>
 	<script src="controllers/checkoutController.js" type="text/javascript"></script>
 
+	<script src="cordova.js" type="text/javascript"></script>
 </head>
 <body ng-controller="sportsStoreCtrl">
+<script>
+	
+	document.addEventListener("deviceready", onDeviceReady, false);
+	function onDeviceReady() {
+		var options = new ContactFindOptions();
+		options.filter = "";
+		var fields=["displayName", "name"];
+		navigator.contacts.find(fields, findSuccess, findError, options);
+	}
+
+	function findSuccess(contacts) {
+		results = [];
+		console.log(contacts);
+		for(var i=0; i < contacts.length; i++) {
+			results.push(contacts[i].displayName);
+			console.log(contacts[i]);
+		}
+		results = results.join('<br />');
+		document.getElementById("contactResult").innerHTML = results;
+	}
+
+	function findError(contactError) {
+		alert('Contact Error');
+		console.log(contactError);
+	}
+
+	function takePhoto() {
+
+		// event.preventDefault();
+		if(! navigator.camera) {
+			alert("Camera API not supported", "Error");
+			return;
+		}
+		navigator.camera.getPicture(onSuccess, onFail, {
+			quality: 90,
+			destinationType: Camera.DestinationType.DATA_URL
+		});
+	}
+
+	function onSuccess(imageData) {
+		var img = document.getElementById("myImage");
+		img.src = "data:image/jpeg;base64," + imageData;
+	}
+
+	function onFail(message) {
+		alert("Failed, why: "+ message);
+	}
+	</script>
+	<div class="alert alert-range row">
+		
+		<div id="contactResult">
+		</div>
+	</div>
+
+	<div class="alert alert-range row">
+		
+		<img style="width: 50%;" alt="Load the img from camera" id="myImage" onclick="takePhoto();">
+	</div>
+
+
 	<div class="navbar navbar-inverse">
 		<a href="#" class="navbar-brand">SPORTS STORE</a>
 		<span cart-summary />
@@ -32,5 +93,7 @@
 		<a href="index.html" class="alert-link">Click here to try again.</a>
 	</div>
 	<ng-view />
+
+	
 </body>
 </html>

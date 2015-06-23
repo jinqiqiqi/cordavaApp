@@ -1,4 +1,4 @@
-app.constant('productUrl', "http://sportstore:5500/products/")
+app.constant('productUrl', "http://192.168.232.114:5500/products/")
 .config(function($httpProvider) {
 	$httpProvider.defaults.withCredentials = true;
 })

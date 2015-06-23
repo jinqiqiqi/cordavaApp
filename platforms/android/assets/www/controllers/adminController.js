@@ -1,7 +1,7 @@
 var app = angular.module("sportsStoreAdmin", ["ngRoute", "ngResource"]);
 app
-.constant('authUrl', "http://sportstore:5500/users/login")
-.constant('ordersUrl', "http://sportstore:5500/orders")
+.constant('authUrl', "http://192.168.232.114:5500/users/login")
+.constant('ordersUrl', "http://192.168.232.114:5500/orders")
 .controller('authCtrl', ['$scope', '$http', '$location', 'authUrl', function($scope, $http, $location, authUrl){
 
 	$scope.authenticate = function(user, pass) {
